@@ -66,10 +66,10 @@ def bfs(startState):
     global goalNode, maxFringeSize, maxDepthReached
     
     visited, queue = set(), deque([State(startState, None, None, 0, 0, 0)])
-    while queue:
-        node = queue.popleft()
+    while queue:                            #--- Execute until we have elements left in queue 
+        node = queue.popleft()              #--- pop the first state
         
-        visited.add(node.map)
+        visited.add(node.map)               #--- Keep Track of Visited Nodes
         
         #--- Goal Test
         if node.state == goalState:
@@ -141,10 +141,10 @@ def expand(node):
     childNodes = []
     
     #Append all the child to childNode for a valid move
-    childNodes.append(State(validMove(node.state,'RIGHT'),node,'RIGHT',node.depth + 1, node.cost + 1, 0)) #--- Top
-    childNodes.append(State(validMove(node.state,'DOWN'),node,'DOWN',node.depth + 1, node.cost + 1, 0)) #--- Down
-    childNodes.append(State(validMove(node.state,'LEFT'),node,'LEFT',node.depth + 1, node.cost + 1, 0)) #--- Left
-    childNodes.append(State(validMove(node.state,'UP'),node,'UP',node.depth + 1, node.cost + 1, 0)) #--- Right
+    childNodes.append(State(validMove(node.state,'D'),node,'D',node.depth + 1, node.cost + 1, 0)) #--- Down
+    childNodes.append(State(validMove(node.state,'L'),node,'L',node.depth + 1, node.cost + 1, 0)) #--- Left
+    childNodes.append(State(validMove(node.state,'R'),node,'R',node.depth + 1, node.cost + 1, 0)) #--- Right
+    childNodes.append(State(validMove(node.state,'U'),node,'U',node.depth + 1, node.cost + 1, 0)) #--- UP
     
     nodes = [child for child in childNodes if child.state]
     return nodes
@@ -157,7 +157,7 @@ Function validMove()
 def validMove(state, position):
     newState = state[:]
     index = newState.index(0) #--- get the position of blank tile
-    if position == 'UP':  # Up
+    if position == 'U':  # Up
 
         if index not in range(0, puzzleSide): #--- Valid iff not present in top row
             #--- Swap the empty tile with top element
@@ -169,7 +169,7 @@ def validMove(state, position):
         else:
             return None
 
-    if position == 'DOWN':  # Down
+    if position == 'D':  # Down
         #--- Swap the empty tile with bottom element
         if index not in range(puzzleLen - puzzleSide, puzzleLen):
 
@@ -181,7 +181,7 @@ def validMove(state, position):
         else:
             return None
 
-    if position == 'LEFT':  # Left
+    if position == 'L':  # Left
 
         if index not in range(0, puzzleLen, puzzleSide):
 
@@ -193,7 +193,7 @@ def validMove(state, position):
         else:
             return None
 
-    if position == 'RIGHT':  # Right
+    if position == 'R':  # Right
 
         if index not in range(puzzleSide - 1, puzzleLen, puzzleSide):
 
@@ -237,7 +237,7 @@ def output(fringe, time):
         global moves
         
         moves = backtrack() #--- get all the moves performed to reach the goal state
-        file = open('testcase_dfs.txt', 'w')
+        file = open('testcase_bfs.txt', 'w')
         file.write("\npath_to_goal: " + str(moves))
         file.write("\ncost_of_path: " + str(len(moves)))
         file.write("\nnodes_expanded: " + str(nodesExpanded))

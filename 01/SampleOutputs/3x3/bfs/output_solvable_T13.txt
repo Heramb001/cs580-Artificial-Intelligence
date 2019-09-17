@@ -1,0 +1,8 @@
+<-- # SOLVABLE # -->path_to_goal: ['Down', 'Left', 'Up', 'Left', 'Up', 'Right', 'Down', 'Right', 'Up', 'Left', 'Down', 'Down', 'Left', 'Up', 'Up', 'Right', 'Down', 'Right', 'Down', 'Left', 'Left', 'Up', 'Right', 'Right', 'Down']
+cost_of_path: 25
+nodes_expanded: 152699
+fringe_size: 14622
+max_fringe_size: 25136
+search_depth: 25
+max_search_depth: 26
+running_time: 2.26933810
