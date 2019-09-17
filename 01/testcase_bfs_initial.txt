@@ -1,0 +1,9 @@
+
+path_to_goal: ['RIGHT']
+cost_of_path: 1
+nodes_expanded: 3
+fringe_size: 5
+max_fringe_size: 6
+search_depth: 1
+max_search_depth: 2
+running_time: 0.00080657

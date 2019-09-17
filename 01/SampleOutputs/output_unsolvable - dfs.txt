@@ -1,0 +1,5 @@
+<-- # UNSOLVABLE # -->
+nodes_expanded: 181440
+max_fringe_size: 42913
+max_search_depth: 66126
+running_time: 9.47519180
