@@ -130,6 +130,41 @@ def dfs(startState):
     #--- if search is complete and goal state not reached then return goal not found
     return False, None
 
+"""
+Function - greedy() (Greedy Search)
+    - works as a Greedy Search with using a heuristic function.
+
+"""
+def greedy(startState):
+    
+    global goalNode, maxFringeSize, maxDepthReached
+    #--- if search is complete and goal state not reached then return goal not found
+    return False, None
+
+
+"""
+Function - ast() (A star Search)
+    - works as a A star Search algorithm.
+
+"""
+def ast(startState):
+    
+    global goalNode, maxFringeSize, maxDepthReached
+    #--- if search is complete and goal state not reached then return goal not found
+    return False, None
+
+
+"""
+Function - h1() (Heuristic Function 1 : number of misplaced tiles)
+    - works as a A star Search algorithm.
+
+"""
+
+"""
+Function - h2() (Heuristic Function 2 : sum of the distances of every tile to its goal position.)
+    - works as a A star Search algorithm.
+
+"""
     
 """
 Function - expand()
@@ -285,7 +320,9 @@ def main():
 
 function_map = {
     'bfs': bfs,
-    'dfs': dfs
+    'dfs': dfs,
+    'greedy' : greedy,
+    'ast' : ast
     }
 
 if __name__ == '__main__':

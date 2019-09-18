@@ -1,5 +1,16 @@
 # Assignment 1 - Game Solving Agents using Search Techniques
 
+ Problem State								Goal State
+|9   |24   |3   |5   |17   |
+|---|---|---|---|---|
+| 6  | 0  | 13  | 19  | 10  |
+| 11  | 21  | 12  | 1  | 20  |
+| 16  | 4  | 14  | 12  | 15  |
+| 8  | 18  | 23  | 2  | 7  |
+
+
+
+
 - Implementing a agent to solve 24 puzzle problem using Search Techniques like below
   1. Breadth First Search
   2. Depth First Search
