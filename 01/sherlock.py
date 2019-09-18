@@ -79,7 +79,7 @@ def bfs(startState):
         #--- If not a goal state then expand the node
         childNodes = expand(node)
         
-        for child in childNodes:            #--- Traverse every child in the depth
+        for child in childNodes:            #--- Traverse every child in the Level
             if child.map not in visited:    #--- Check if visited or not
                 queue.append(child)         #--- if not visited append as a child
                 visited.add(child.map)      #--- add it to the visited nodes set
@@ -104,11 +104,11 @@ def dfs(startState):
     
     visited, stack = set(), list([State(startState, None, None, 0, 0, 0)])
 
-    while stack:
+    while stack:                                #--- Execute until we have elements left in queue
 
-        node = stack.pop()
+        node = stack.pop()                      #--- pop the first state
 
-        visited.add(node.map)
+        visited.add(node.map)                   #--- Keep Track of Visited Nodes
 
         if node.state == goalState:
             goalNode = node
@@ -116,16 +116,17 @@ def dfs(startState):
 
         neighbors = reversed(expand(node))
 
-        for neighbor in neighbors:
-            if neighbor.map not in visited:
-                stack.append(neighbor)
-                visited.add(neighbor.map)
+        for neighbor in neighbors:              #--- Traverse every child in the depth
+            if neighbor.map not in visited:     #--- Check if visited or not
+                stack.append(neighbor)          #--- if not visited append as a child
+                visited.add(neighbor.map)       #--- add it to the visited nodes set
 
                 if neighbor.depth > maxDepthReached:
                     maxDepthReached += 1
 
         if len(stack) > maxFringeSize:
             maxFringeSize = len(stack)
+    
     #--- if search is complete and goal state not reached then return goal not found
     return False, None
 
