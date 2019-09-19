@@ -148,6 +148,46 @@ def ast(start_state):
         if len(heap) > max_frontier_size:
             max_frontier_size = len(heap)
 
+"""
+
+"""
+def gs(start_state):
+    global max_frontier_size, goal_node, max_search_depth
+    
+    #--- get the heuristic function first
+    heuristic = input('-- Please select the Heuristic Function\
+                      h1 : number of misplaced tiles\
+                      h2 : sum of the distances of every tile to its goal position.\
+                      -- Enter your choice : ')
+    heuristicFunc = heuristic_map[heuristic]
+    explored, pQueue = set(), list()
+    key = heuristicFunc(start_state)
+    root = State(start_state, None, None, 0, 0, key)
+    entry = (key, root)
+    heappush(pQueue, entry)
+    while pQueue : 
+        node = heappop(pQueue)
+        explored.add(node.map)
+        if node.state == goal_state:
+            goal_node = node
+            return True, pQueue
+
+        neighbors = expand(node)
+        for neighbor in neighbors:
+            neighbor.key = h(neighbor.state)
+            entry = (neighbor.key, neighbor.move, neighbor)
+            if neighbor.map not in explored:
+                pQueue.append(neighbor)
+                explored.add(neighbor.map)
+
+                if neighbor.depth > max_search_depth:
+                    max_search_depth += 1
+
+        if len(pQueue) > max_frontier_size:
+            max_frontier_size = len(pQueue)
+
+    return False, None
+    
 
 def ida(start_state):
 
@@ -402,8 +442,14 @@ function_map = {
     'bfs': bfs,
     'dfs': dfs,
     'ast': ast,
-    'ida': ida
+    'ida': ida,
+    'gs' : gs
 }
+
+heuristic_map = {
+        'h1' : h1,
+        'h2' : h2
+        }
 
 if __name__ == '__main__':
     main()
