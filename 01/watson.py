@@ -284,6 +284,17 @@ def h(state):
                for b, g in ((state.index(i), goal_state.index(i)) for i in range(1, board_len)))
 
 
+def h1(state):
+    count = 0
+    for i in range(0,board_len):
+        if not (state.index(i) == goal_state.index(i)) : 
+            count+=1
+    return count 
+
+def h2(state):
+    sum = 0
+    return sum
+
 def backtrace():
 
     current_node = goal_node
