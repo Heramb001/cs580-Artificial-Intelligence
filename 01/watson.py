@@ -107,12 +107,12 @@ def ast(start_state):
     while heap:
 
         node = heappop(heap)
-
+        #print(node)
         explored.add(node[2].map)
 
         if node[2].state == goal_state:
             goal_node = node[2]
-            return heap
+            return True, heap
 
         neighbors = expand(node[2])
 
@@ -147,27 +147,85 @@ def ast(start_state):
 
         if len(heap) > max_frontier_size:
             max_frontier_size = len(heap)
+    return False, None
 
 """
 
 """
-def gs(start_state):
+def greedy(start_state):
     global max_frontier_size, goal_node, max_search_depth
     
     #--- get the heuristic function first
     heuristic = input('-- Please select the Heuristic Function\
-                      h1 : number of misplaced tiles\
-                      h2 : sum of the distances of every tile to its goal position.\
-                      -- Enter your choice : ')
+                      \n h1 : number of misplaced tiles\
+                      \n h2 : sum of the distances of every tile to its goal position.\
+                      \n-- Enter your choice : ')
     heuristicFunc = heuristic_map[heuristic]
+    
     explored, pQueue = set(), list()
+
     key = heuristicFunc(start_state)
+    
     root = State(start_state, None, None, 0, 0, key)
-    entry = (key, root)
+
+    entry = (key, 0, root)
+
+    heappush(pQueue, entry)
+
+    while pQueue:
+
+        node = heappop(pQueue)
+        #print(node)
+        explored.add(node[2].map)
+
+        if node[2].state == goal_state:
+            goal_node = node[2]
+            return True, pQueue
+
+        neighbors = expand(node[2])
+
+        for neighbor in neighbors:
+
+            neighbor.key = heuristicFunc(neighbor.state)
+
+            entry = (neighbor.key, neighbor.move, neighbor)
+
+            if neighbor.map not in explored:
+
+                heappush(pQueue, entry)
+
+                explored.add(neighbor.map)
+
+                if neighbor.depth > max_search_depth:
+                    max_search_depth += 1
+
+            """
+            elif neighbor.map in heap_entry and neighbor.key < heap_entry[neighbor.map][2].key:
+
+                hindex = heap.index((heap_entry[neighbor.map][2].key,
+                                     heap_entry[neighbor.map][2].move,
+                                     heap_entry[neighbor.map][2]))
+
+                heap[int(hindex)] = entry
+
+                heap_entry[neighbor.map] = entry
+
+                heapify(heap)
+            """
+        if len(pQueue) > max_frontier_size:
+            max_frontier_size = len(pQueue)
+    return False, None
+    """
+    root = State(start_state, None, None, 0, 0, key)
+    entry = (key, 0, root)
     heappush(pQueue, entry)
     while pQueue : 
-        node = heappop(pQueue)
+        popped = heappop(pQueue)
+        print('node --',popped)
+        node = popped[2]
+        print('node updated -- ',node.state)
         explored.add(node.map)
+        
         if node.state == goal_state:
             goal_node = node
             return True, pQueue
@@ -177,6 +235,7 @@ def gs(start_state):
             neighbor.key = h(neighbor.state)
             entry = (neighbor.key, neighbor.move, neighbor)
             if neighbor.map not in explored:
+                heappush(pQueue, entry)
                 pQueue.append(neighbor)
                 explored.add(neighbor.map)
 
@@ -187,6 +246,7 @@ def gs(start_state):
             max_frontier_size = len(pQueue)
 
     return False, None
+    """
     
 
 def ida(start_state):
@@ -331,9 +391,10 @@ def h1(state):
             count+=1
     return count 
 
-def h2(state):
-    sum = 0
-    return sum
+def h2(state): 
+    return sum(abs(p%board_side - g%board_side) + abs(p//board_side - g//board_side)
+               for p,g in ((state.index(i),goal_state.index(i)) 
+               for i in range(1, board_len)))
 
 def backtrace():
 
@@ -417,7 +478,13 @@ def main():
 
     read(args.board)
     """
-    algorithm = input('--> Please enter the algorithm : ')
+    algorithm = input('--> Please select the algorithm \
+                      \n1. bfs : Breadth First Search \
+                      \n2. dfs : Depth First Search \
+                      \n3. ast : A Star Search\
+                      \n4. ida : Iterative Deepening\
+                      \n5. greedy : Greedy Search\
+                      \n enter the Selection : ')
     
     data = input('--> Enter puzzle elements : ')
     
@@ -443,7 +510,7 @@ function_map = {
     'dfs': dfs,
     'ast': ast,
     'ida': ida,
-    'gs' : gs
+    'greedy' : greedy
 }
 
 heuristic_map = {

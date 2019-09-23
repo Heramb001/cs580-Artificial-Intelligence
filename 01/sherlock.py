@@ -40,6 +40,7 @@ Goal State
 from math import sqrt
 from collections import deque
 from state import State
+from heapq import heappush, heappop, heapify
 import time
 
 
@@ -138,6 +139,46 @@ Function - greedy() (Greedy Search)
 def greedy(startState):
     
     global goalNode, maxFringeSize, maxDepthReached
+    #--- get the heuristic function first
+    heuristic = input('-- Please select the Heuristic Function\
+                      \n h1 : number of misplaced tiles\
+                      \n h2 : sum of the distances of every tile to its goal position.\
+                      \n-- Enter your choice : ')
+    heuristicFunc = heuristic_map[heuristic]
+    visited, pQueue = set(), list()
+    key = heuristicFunc(startState)
+    root = State(startState, None, None, 0, 0, key)
+    entry = (key, 0, root)
+    heappush(pQueue, entry)
+    while pQueue:
+
+        node = heappop(pQueue)
+        #print(node)
+        visited.add(node[2].map)
+
+        if node[2].state == goalState:
+            goalNode = node[2]
+            return True, pQueue
+
+        neighbors = expand(node[2])
+
+        for neighbor in neighbors:
+
+            neighbor.key = heuristicFunc(neighbor.state)
+
+            entry = (neighbor.key, neighbor.move, neighbor)
+
+            if neighbor.map not in visited:
+
+                heappush(pQueue, entry)
+
+                visited.add(neighbor.map)
+
+                if neighbor.depth > maxDepthReached:
+                    maxDepthReached += 1
+                    
+        if len(pQueue) > maxFringeSize:
+            maxFringeSize = len(pQueue)
     #--- if search is complete and goal state not reached then return goal not found
     return False, None
 
@@ -150,22 +191,72 @@ Function - ast() (A star Search)
 def ast(startState):
     
     global goalNode, maxFringeSize, maxDepthReached
+    #--- get the heuristic function first
+    heuristic = input('-- Please select the Heuristic Function\
+                      \n h1 : number of misplaced tiles\
+                      \n h2 : sum of the distances of every tile to its goal position.\
+                      \n-- Enter your choice : ')
+    heuristicFunc = heuristic_map[heuristic]
+    visited, pQueue = set(), list()
+    key = heuristicFunc(startState)
+    root = State(startState, None, None, 0, 0, key)
+    entry = (key, 0, root)
+    heappush(pQueue, entry)
+    while pQueue:
+
+        node = heappop(pQueue)
+        #print(node)
+        visited.add(node[2].map)
+
+        if node[2].state == goalState:
+            goalNode = node[2]
+            return True, pQueue
+
+        neighbors = expand(node[2])
+
+        for neighbor in neighbors:
+
+            neighbor.key = neighbor.cost + heuristicFunc(neighbor.state)
+
+            entry = (neighbor.key, neighbor.move, neighbor)
+
+            if neighbor.map not in visited:
+
+                heappush(pQueue, entry)
+
+                visited.add(neighbor.map)
+
+                if neighbor.depth > maxDepthReached:
+                    maxDepthReached += 1
+                    
+        if len(pQueue) > maxFringeSize:
+            maxFringeSize = len(pQueue)
     #--- if search is complete and goal state not reached then return goal not found
     return False, None
-
 
 """
 Function - h1() (Heuristic Function 1 : number of misplaced tiles)
     - works as a A star Search algorithm.
 
 """
-
+def h1(state):
+    count = 0
+    for i in range(0,puzzleLen):
+        if not (state.index(i) == goalState.index(i)) : 
+            count+=1
+    return count 
 """
 Function - h2() (Heuristic Function 2 : sum of the distances of every tile to its goal position.)
     - works as a A star Search algorithm.
 
 """
-    
+
+def h2(state): 
+    return sum(abs(p%puzzleSide - g%puzzleSide) + abs(p//puzzleSide - g//puzzleSide)
+               for p,g in ((state.index(i),goalState.index(i)) 
+               for i in range(1, puzzleLen))) 
+
+   
 """
 Function - expand()
     - expands the node and creates valid child nodes
@@ -297,7 +388,12 @@ Function - main()
     - Executed everytime the python file starts.
 """
 def main():
-    algorithm = input('--> Please enter the algorithm : ')
+    algorithm = input('--> Please select the algorithm \
+                      \n1. bfs : Breadth First Search \
+                      \n2. dfs : Depth First Search \
+                      \n3. ast : A Star Search\
+                      \n4. greedy : Greedy Search\
+                      \n enter the selection : ')
     
     data = input('--> Enter puzzle elements : ')
     
@@ -324,6 +420,11 @@ function_map = {
     'greedy' : greedy,
     'ast' : ast
     }
+
+heuristic_map = {
+        'h1' : h1,
+        'h2' : h2
+        }
 
 if __name__ == '__main__':
     main()
