@@ -1,0 +1,9 @@
+
+path_to_goal: ['L', 'L', 'L', 'L', 'U', 'U', 'U', 'U', 'R', 'R', 'R', 'R', 'D', 'D', 'D', 'D', 'U', 'U', 'U', 'U', 'R', 'R', 'R', 'R', 'D', 'D', 'D', 'D', 'R', 'R', 'R', 'R', 'D', 'D', 'D', 'D', 'R', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'R', 'R', 'R', 'R', 'R', 'R', 'R']
+cost_of_path: 52
+nodes_expanded: 52
+fringe_size: 13
+max_fringe_size: 14
+search_depth: 16
+max_search_depth: 16
+running_time: 0.13663673

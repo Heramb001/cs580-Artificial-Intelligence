@@ -1,0 +1,9 @@
+
+path_to_goal: ['R', 'R', 'R', 'R', 'D', 'D', 'D', 'D', 'R', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'R', 'R', 'R', 'R', 'R', 'R', 'R']
+cost_of_path: 24
+nodes_expanded: 24
+fringe_size: 7
+max_fringe_size: 8
+search_depth: 8
+max_search_depth: 8
+running_time: 0.02194142

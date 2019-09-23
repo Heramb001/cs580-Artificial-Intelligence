@@ -152,15 +152,8 @@ def ast(start_state):
 """
 
 """
-def greedy(start_state):
+def greedy(start_state, heuristicFunc):
     global max_frontier_size, goal_node, max_search_depth
-    
-    #--- get the heuristic function first
-    heuristic = input('-- Please select the Heuristic Function\
-                      \n h1 : number of misplaced tiles\
-                      \n h2 : sum of the distances of every tile to its goal position.\
-                      \n-- Enter your choice : ')
-    heuristicFunc = heuristic_map[heuristic]
     
     explored, pQueue = set(), list()
 
@@ -491,10 +484,24 @@ def main():
     get(data)
 
     function = function_map[algorithm]
+    
+    # if greedy ask for whiich heuristic they are opting for
+    if(algorithm == 'greedy' | algorithm == 'ast'):
+        heuristic = input('-- Please select the Heuristic Function\
+                      \n h1 : number of misplaced tiles\
+                      \n h2 : sum of the distances of every tile to its goal position.\
+                      \n-- Enter your choice : ')
+    
+        heuristicFunc = heuristic_map[heuristic]
+        
+        start = timeit.default_timer()
+        
+        search, frontier = function(initial_state, heuristicFunc)
+    else :
+        start = timeit.default_timer()
 
-    start = timeit.default_timer()
-
-    search, frontier = function(initial_state)
+        search, frontier = function(initial_state)
+        
 
     stop = timeit.default_timer()
 

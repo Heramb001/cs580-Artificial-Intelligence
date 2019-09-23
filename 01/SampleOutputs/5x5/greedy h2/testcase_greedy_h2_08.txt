@@ -1,0 +1,10 @@
+
+Problem State : [6, 1, 2, 3, 4, 11, 7, 8, 9, 5, 16, 12, 13, 14, 10, 21, 17, 18, 19, 15, 22, 23, 24, 20, 0]
+path_to_goal : ['L', 'L', 'L', 'L', 'U', 'U', 'U', 'U', 'R', 'R', 'R', 'R', 'D', 'D', 'D', 'D']
+cost_of_path(Moves): 16
+nodes_expanded: 16
+fringe_size: 13
+max_fringe_size: 14
+search_depth: 16
+max_search_depth: 16
+running_time: 0.00196290

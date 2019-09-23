@@ -352,10 +352,9 @@ def output(fringe, time, testNum):
         global moves
         
         moves = backtrack() #--- get all the moves performed to reach the goal state
-        file = open('testcase_greedy_h2_'+str(testNum)+'.txt', 'w')
-        file.write("\nProblem State : "+str(initialState))
-        file.write("\npath_to_goal : " + str(moves))
-        file.write("\ncost_of_path(Moves): " + str(len(moves)))
+        file = open('testcase_greedy_'+str(testNum)+'.txt', 'w')
+        file.write("\npath_to_goal: " + str(moves))
+        file.write("\ncost_of_path: " + str(len(moves)))
         file.write("\nnodes_expanded: " + str(nodesExpanded))
         file.write("\nfringe_size: " + str(len(fringe)))
         file.write("\nmax_fringe_size: " + str(maxFringeSize))
@@ -394,25 +393,27 @@ def main():
         heuristicFunc = heuristic_map[heuristic]
     else:
         heuristicFunc = None
-    
-    data = input('--> Enter puzzle elements : ')
-    
-    get(data)
-
-    function = function_map[algorithm]
-    
-    start = time.time()  
-        
-    search, fringe = function(initialState, heuristicFunc)
-    
-    stop = time.time()
-
-    if not search : 
-        print('<-- # UNSOLVABLE # -->')
-        output(fringe, stop-start, 'No Solution')
-    else : 
-        output(fringe, stop-start, 'Solved')
-        
+    #open the input file 
+    f = open('input.txt','r')
+    inputs = f.readlines()
+    counter = 1
+    print(inputs)
+    for data in inputs:
+        print('--> solving for : ',data)
+        get(data)
+        function = function_map[algorithm]       
+        start = time.time()        
+        search, fringe = function(initialState, heuristicFunc)
+        stop = time.time()
+        if search : 
+            output(fringe, stop-start, counter)
+            counter+=1
+        else : 
+            print('Validated all the possible states but goal state not found')
+            print('<-- # UNSOLVABLE # -->')
+            output(fringe, stop-start)
+        initialState.clear()
+        moves.clear()
         
 function_map = {
     'bfs': bfs,
