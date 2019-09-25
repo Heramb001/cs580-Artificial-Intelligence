@@ -57,7 +57,7 @@ The state given above is defined for every valid state in statespace.
 2. prompts user to select any choice of algorithm as shown below.
 3. enter the algorithm choice
 
-![Algorithm Prompt](https://github.com/Heramb001/cs580-Artificial-Intelligence/tree/master/01/images/prompt1.png "Algorithm Prompt")
+![Algorithm Prompt](https://github.com/Heramb001/cs580-Artificial-Intelligence/tree/master/01/images/prompt1.PNG "Algorithm Prompt")
 
 4. If choice is a greedy search or A star, program prompts for heuristic function as shown below, user can select one.
    else Code moves to step 5
