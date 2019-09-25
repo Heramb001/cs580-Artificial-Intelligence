@@ -432,7 +432,7 @@ def main():
         print('<-- # UNSOLVABLE # -->')
         output(fringe, stop-start, 'No_Solution')
     else : 
-        output(fringe, stop-start, 'Solved')
+        output(fringe, stop-start, 'h2')
         
         
 function_map = {
