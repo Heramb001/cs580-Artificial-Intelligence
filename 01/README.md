@@ -56,12 +56,21 @@ The state given above is defined for every valid state in statespace.
 1. execute sherlock.py
 2. prompts user to select any choice of algorithm as shown below.
 3. enter the algorithm choice
-4. if choice is a greedy search or A star, program prompts for heuristic function as shown below, user can select one.
-5. Prompts user to enter the puzzle elements :
-6. press enter
 
-code gets executed and an output file is generated.
+![Algorithm Prompt](https://github.com/Heramb001/cs580-Artificial-Intelligence/tree/master/01/images/prompt1.png "Algorithm Prompt")
 
+4. If choice is a greedy search or A star, program prompts for heuristic function as shown below, user can select one.
+   else Code moves to step 5
+
+![Heuristic Prompt](https://github.com/Heramb001/cs580-Artificial-Intelligence/tree/master/01/images/prompt2.png "Heuristic Prompt")
+
+5. Prompts user to enter the puzzle elements.
+
+![Puzzle Prompt](https://github.com/Heramb001/cs580-Artificial-Intelligence/tree/master/01/images/prompt3.png "Puzzle Prompt")
+
+6. press enter code gets executed and an output file is generated.
+
+![Output](https://github.com/Heramb001/cs580-Artificial-Intelligence/tree/master/01/images/output.png "Output")
 ### Conclusion
 ------
 From the initiaal analysis done on the 3x3 we were able to solve all the valid statespaces to reach the goal state using bfs, dfs, A star, Greedy search. but when we implement the same code for 5x5 :  
