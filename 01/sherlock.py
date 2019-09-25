@@ -40,12 +40,13 @@ Goal State
 from math import sqrt
 from collections import deque
 from state import State
-from heapq import heappush, heappop, heapify
+from heapq import heappush, heappop
 import time
 
 
 #--- Specify a goal state which will be tested to stop the program.
 goalState = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,0]
+
 goalNode = State
 initialState = []   #--- Initial State to be empty List
 puzzleLen = 0       #--- Length of the puzzle (Eg - for 24 puzzle problem, len = 25)  
@@ -115,7 +116,7 @@ def dfs(startState):
             goalNode = node
             return True, stack
 
-        neighbors = reversed(expand(node))
+        neighbors = reversed(expand(node))      #--- reversing the order to behave as a stack(Last In First Out)
 
         for neighbor in neighbors:              #--- Traverse every child in the depth
             if neighbor.map not in visited:     #--- Check if visited or not
@@ -224,7 +225,7 @@ def ast(startState, heuristicFunc):
 
 """
 Function - h1() (Heuristic Function 1 : number of misplaced tiles)
-    - works as a A star Search algorithm.
+    - comparre the index of current state with the goal state, increase the counter when the index doesn't match 
 
 """
 def h1(state):
@@ -235,10 +236,30 @@ def h1(state):
     return count 
 """
 Function - h2() (Heuristic Function 2 : sum of the distances of every tile to its goal position.)
-    - works as a A star Search algorithm.
+    - As this is a grid of 5x5 
+        X - to get position on X axis we perform Modulo(%) with puzzle side to get values between 0 - length of side of puzzle(in this case 5)
+        Y - to get position on Y axis we perform Division(//) with puzzle side
+        Adding both X and Y gives the distance from current state to goal state.
+    Eg : take a grid of 3x3
+    x,y positions in the board are given by : 
+        0,2 | 1,2 | 2,2
+        0,1 | 1,1 | 2,1
+        0,0 | 1,0 | 2,0
+        
+        to move from one position to another position, we have to move x from 0-2 and y from 0-2.
+        
+Goal -   1,2,3     Current -  1,2,3
+         4,5,6                7,4,5
+         7,8,0                0,8,6
+         
+         4,5,6,7 - are misplaced tiles
+         number of steps for 4 to reach goal - left by 1
+                              Mathematically - => 1-0 + 1-1 => 1
+        similarly - 5 - left by 1
+                    6 - up by 1
+                    7 - down by 1
 
 """
-
 def h2(state): 
     return sum(abs(p%puzzleSide - g%puzzleSide) + abs(p//puzzleSide - g//puzzleSide)
                for p,g in ((state.index(i),goalState.index(i)) 
@@ -352,7 +373,7 @@ def output(fringe, time, testNum):
         global moves
         
         moves = backtrack() #--- get all the moves performed to reach the goal state
-        file = open('testcase_greedy_h2_'+str(testNum)+'.txt', 'w')
+        file = open('testcase_'+str(testNum)+'.txt', 'w')
         file.write("\nProblem State : "+str(initialState))
         file.write("\npath_to_goal : " + str(moves))
         file.write("\ncost_of_path(Moves): " + str(len(moves)))
@@ -409,7 +430,7 @@ def main():
 
     if not search : 
         print('<-- # UNSOLVABLE # -->')
-        output(fringe, stop-start, 'No Solution')
+        output(fringe, stop-start, 'No_Solution')
     else : 
         output(fringe, stop-start, 'Solved')
         

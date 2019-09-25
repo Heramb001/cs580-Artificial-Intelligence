@@ -9,7 +9,7 @@ parent - parent of the current state
 move   - from which move did we obtain the current state
 depth  - depth of current state
 cost   - cost of current state
-key    -  
+key    - decided by the heuristic function
 
 
 """
