@@ -243,7 +243,9 @@ Function - h2() (Heuristic Function 2 : sum of the distances of every tile to it
     Eg : take a grid of 3x3
     x,y positions in the board are given by : 
         0,2 | 1,2 | 2,2
+        ----|-----|----
         0,1 | 1,1 | 2,1
+        ----|-----|----
         0,0 | 1,0 | 2,0
         
         to move from one position to another position, we have to move x from 0-2 and y from 0-2.
@@ -371,7 +373,6 @@ def output(fringe, time, testNum):
     if fringe:
         
         global moves
-        
         moves = backtrack() #--- get all the moves performed to reach the goal state
         file = open('testcase_'+str(testNum)+'.txt', 'w')
         file.write("\nProblem State : "+str(initialState))
