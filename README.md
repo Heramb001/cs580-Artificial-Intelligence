@@ -3,9 +3,9 @@ This repository contains all the assignments related to Artificial Intelligence 
 
 Course Instructor : Dr. Yaohang li 
 
-[!email](yaohang@cs.odu.edu) | [!webpage](https://www.cs.odu.edu/~yaohang/)
+[email](yaohang@cs.odu.edu) | [webpage](https://www.cs.odu.edu/~yaohang/)
 
-Course Webpage : [!CS580](https://www.cs.odu.edu/~yaohang/cs480/)
+Course Webpage : [CS580](https://www.cs.odu.edu/~yaohang/cs480/)
 
 ### Assignment 1 - Problem Solving Agents using Search Techniques
 
@@ -36,5 +36,5 @@ Course Webpage : [!CS580](https://www.cs.odu.edu/~yaohang/cs480/)
 
 ### Final Semester Project - Kaggle’s past challenge “Traveling Santa 2018 - Prime Paths.”
 
-- [!Travelling Santa 2018](https://www.kaggle.com/c/traveling-santa-2018-prime-paths/).
+- [Travelling Santa 2018](https://www.kaggle.com/c/traveling-santa-2018-prime-paths/).
 - required to implement a genetic algorithm to solve the traveling Santa 2018 – Prime Paths. You need to design the representation of the candidate solutions, the implementation of genetic operators (crossover/mutation), and the design of the algorithm.
