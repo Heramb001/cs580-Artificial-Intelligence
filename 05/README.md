@@ -69,7 +69,7 @@ Built a Neural Network Model using keras and tensor flow for 10,100,500 nodes. A
 
 The notebook is having the report as well as code in it.
 
-***Pre-reqiuisites***
+### ***Pre-reqiuisites***
 
   - Python 3.7
   - Download tensorflow and keras using below commands.
@@ -80,3 +80,8 @@ The notebook is having the report as well as code in it.
     
     ***Using conda***
       - conda install -c anaconda keras
+
+### ***Steps To run the Code***
+  - Open the Ipython Notebook. 
+  - place the .windep file in the same directory
+  - start executing cell by cell.
