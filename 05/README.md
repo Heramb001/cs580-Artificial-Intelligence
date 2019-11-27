@@ -70,10 +70,13 @@ Built a Neural Network Model using keras and tensor flow for 10,100,500 nodes. A
 The notebook is having the report as well as code in it.
 
 ***Pre-reqiuisites***
+
   - Python 3.7
   - Download tensorflow and keras using below commands.
+    
     ***Using PIP***
-      pip install tensorflow #----- install tensorflow
-      pip install keras
+      - pip install tensorflow #----- install tensorflow
+      - pip install keras
+    
     ***Using conda***
-      conda install -c anaconda keras
+      - conda install -c anaconda keras
