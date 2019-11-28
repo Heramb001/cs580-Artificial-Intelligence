@@ -33,6 +33,9 @@ Course Webpage : [CS580](https://www.cs.odu.edu/~yaohang/cs480/)
 
 - write an AI program to play Othello with a human player.
 
+### Assignment 5 - Pattern Recognition using Neural Network
+
+- In this assignment, we are asked to design a pattern recognition neural network to recognize handwriting digits (0-9). For example, the following sample represents a handwriting 9.
 
 ### Final Semester Project - Kaggle’s past challenge “Traveling Santa 2018 - Prime Paths.”
 
