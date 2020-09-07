@@ -40,4 +40,5 @@ Course Webpage : [CS580](https://www.cs.odu.edu/~yaohang/cs480/)
 ### Final Semester Project - Kaggle’s past challenge “Traveling Santa 2018 - Prime Paths.”
 
 - [Travelling Santa 2018](https://www.kaggle.com/c/traveling-santa-2018-prime-paths/).
-- required to implement a genetic algorithm to solve the traveling Santa 2018 – Prime Paths. You need to design the representation of the candidate solutions, the implementation of genetic operators (crossover/mutation), and the design of the algorithm.
+- Required to implement a genetic algorithm to solve the traveling Santa 2018 – Prime Paths. You need to design the representation of the candidate solutions, the implementation of genetic operators (crossover/mutation), and the design of the algorithm.
+- [Project Repo](https://github.com/Heramb001/Artificial-Intelligence-Travelling-Santa-Prime-Paths) 
